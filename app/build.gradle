@@ -1,0 +1,70 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
+        resolutionStrategy.force 'com.android.support:support-annotations:25.3.1'
+    }
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "pl.mikolajlen.whereiam"
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "pl.mikolajlen.whereami.CustomEspressoRunner"
+    }
+    dataBinding {
+        enabled = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+android.applicationVariants.all {
+    def aptOutputDir = new File(buildDir, "generated/source/apt/${it.unitTestVariant.dirName}")
+    it.unitTestVariant.addJavaSourceFoldersToModel(aptOutputDir)
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.google.dagger:dagger:2.11'
+    compile 'com.google.dagger:dagger-android:2.11'
+    compile 'com.google.android.gms:play-services-location:11.0.2'
+    testCompile 'com.google.dagger:dagger:2.11'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+    testAnnotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+    compile 'com.annimon:stream:1.1.8'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.1'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+    testCompile 'junit:junit:4.12'
+    testCompile "org.robolectric:robolectric:3.3.2"
+    testCompile "org.mockito:mockito-core:2.8.9"
+    testCompile 'org.assertj:assertj-core:2.8.0'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile "android.arch.lifecycle:runtime:1.0.0-alpha5"
+    compile "android.arch.lifecycle:extensions:1.0.0-alpha5"
+    annotationProcessor "android.arch.lifecycle:compiler:1.0.0-alpha5"
+
+    androidTestCompile 'com.android.support.test:runner:1.0.0'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.0'
+    androidTestCompile 'com.google.dagger:dagger:2.11'
+    androidTestAnnotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+    androidTestCompile "org.mockito:mockito-core:2.8.9"
+    androidTestCompile 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'
+}

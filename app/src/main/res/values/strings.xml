@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">WhereAmI</string>
+    <string name="exampled_location">51.507351, -0.127758</string>
+    <string name="button_text">Fetch location data</string>
+    <string name="other_possible_adresses">Other possible adresses</string>
+    <string name="location_not_fetched">You have not fetch your location yet</string>
+    <string name="your_current_location_is">Your current location is</string>
+    <string name="your_most_possible_address_is">Your most possible address is</string>
+    <string name="location_fetch_error">Cannot retrive your current location. Please try again later</string>
+    <string name="address_fetch_error">Cannot get addresses for your current location</string>
+    <string name="permissions_not_granted">You have to grant all required permissions to fetch location data</string>
+    <string name="alert_dialog_title">Warning</string>
+    <string name="location_format" formatted="false">%f, %f</string>
+
+</resources>
